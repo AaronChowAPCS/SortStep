@@ -45,12 +45,46 @@ public class Sorts
 
   private void merge(int[] a, int first, int mid, int last)
   {
-    //your code here
+    int i = first;
+    int j = mid + 1;
+    int k = first;
+    int [] temp = new int[a.length];
+    while (i <= mid && j <= last)
+    {
+      if (a[i] < a[j]){
+        temp[k] = a[i];
+        i++;
+      }
+      else{
+        temp[k] = a[j];
+        j++;
+      }
+      k++;
+    }
+    while (i <= mid){
+      temp[k] = a[i];
+      i++;
+      k++;
+    }
+    while (j <= last){
+      temp[k] = a[j];
+      j++;
+      k++;
+    }
+    for (k = first; k <= last; k++){
+      a[k] = temp[k];
+    }
   }
 
   public void mergeSort(int[] a, int first, int last)
   {
-    //your code here
+    int center = (first + last) / 2;
+    if( first < last )
+    {
+      mergeSort(a, first, center);
+      mergeSort(a, center + 1, last);
+    }
+    merge(a, first, center, last);
   }
 }
 
